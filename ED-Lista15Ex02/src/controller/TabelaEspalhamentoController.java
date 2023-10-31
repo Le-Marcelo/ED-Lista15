@@ -9,15 +9,16 @@ public class TabelaEspalhamentoController {
 	Lista<Morador>[] hashTable = new Lista[10];
 	
 	public TabelaEspalhamentoController() {
-		for(@SuppressWarnings("unused") Lista<Morador> i : hashTable) {
-			i = new Lista<Morador>();
+		for(int i = 0; i < hashTable.length; i++) {
+			hashTable[i] = new Lista<Morador>();
 		}
 	}
 	
 	public void cadastrarMorador(int numApartamento, String nome, String modeloCarro, String corCarro, String placaCarro) throws Exception{
 		Morador morador = new Morador(numApartamento, nome, modeloCarro, corCarro, placaCarro);
 		
-		hashTable[hash(numApartamento)].addLast(morador);
+		int hashValue = hash(numApartamento);
+		hashTable[hashValue - 1].addLast(morador);
 	}
 	
 	public void consultarMorador(int numApartamento, String placaCarro) throws Exception{
